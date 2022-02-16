@@ -1,0 +1,21 @@
+# Xcode
+#
+# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
+
+## User settings
+xcuserdata/
+
+## Xcode Patch
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcworkspace/contents.xcworkspacedata
+/*.gcno
+**/.build/*
+/builds
+*.xcarchive
+
+# We want to keep the workspace resolved file.
+Packages/**/Package.resolved
+
+.DS_Store
