@@ -17,6 +17,7 @@ public struct GuessView: View {
                     .frame(width: 56, height: 56, alignment: .center)
             }
         }
+        .padding(.horizontal)
         .font(.title)
     }
 }

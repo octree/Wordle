@@ -8,7 +8,7 @@ public enum GameStatus: Hashable, Equatable {
 }
 
 public enum GameConstants {
-    public static let maxAttempCount = 6
+    public static let maxAttempCount = 10
 }
 
 class GameBoardViewModel: ObservableObject {
@@ -19,6 +19,7 @@ class GameBoardViewModel: ObservableObject {
     @Published private(set) var currentGuess: Guess
     @Published private(set) var wrongAttemp: Bool = false
     @Published private(set) var guessStatus: GuessStatus
+    var proxy: ScrollViewProxy?
 
     var allGuesses: [Guess] {
         status == .playing ? appliedGuesses + [currentGuess] : appliedGuesses
@@ -60,9 +61,19 @@ class GameBoardViewModel: ObservableObject {
         case .delete:
             deleteBackward()
         }
+        scrollToBottom()
+    }
+
+    func setProxy(_ proxy: ScrollViewProxy) {
+        self.proxy = proxy
     }
 
     // MARK: - Private Methods
+
+    private func scrollToBottom() {
+        let id = status == .playing ? currentGuess.id : appliedGuesses.last!.id
+        proxy?.scrollTo(id, anchor: .bottom)
+    }
 
     private func insert(character: Character) {
         currentGuess.insert(character: character)

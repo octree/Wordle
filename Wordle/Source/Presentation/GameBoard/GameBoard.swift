@@ -11,14 +11,18 @@ struct GameBoard: View {
 
     var body: some View {
         VStack {
-            VStack(spacing: 16) {
-                ForEach(vm.allGuesses) { guess in
-                    GuessView(puzzle: vm.puzzle, guess: guess)
-                        .offset(x: vm.currentGuess.id == guess.id && vm.wrongAttemp ? -30 : 0)
+            ScrollView(.vertical, showsIndicators: false) {
+                ScrollViewReader { proxy in
+                    let _ = vm.setProxy(proxy)
+                    VStack(spacing: 16) {
+                        ForEach(vm.allGuesses) { guess in
+                            GuessView(puzzle: vm.puzzle, guess: guess)
+                                .offset(x: vm.currentGuess.id == guess.id && vm.wrongAttemp ? -30 : 0)
+                        }
+                    }
+                    .padding(.vertical)
                 }
             }
-            .padding(.top)
-            .padding(.horizontal)
 
             Spacer()
             switch vm.status {
@@ -26,7 +30,7 @@ struct GameBoard: View {
                 Keyboard(guessStatus: vm.guessStatus) { vm.onTap(key: $0) }.padding()
             case .lose:
                 VStack {
-                    Text("You Lose!")
+                    Text("You Lose! \(vm.puzzle.word)")
                         .font(.largeTitle)
                         .fontWeight(.heavy)
                         .foregroundColor(.red)
