@@ -11,6 +11,10 @@
 		C21A167727BCCDF30053DB67 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21A167627BCCDF30053DB67 /* ContentView.swift */; };
 		C21A167927BCCDF40053DB67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C21A167827BCCDF40053DB67 /* Assets.xcassets */; };
 		C21A167C27BCCDF40053DB67 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C21A167B27BCCDF40053DB67 /* Preview Assets.xcassets */; };
+		C21A168A27BCD2F70053DB67 /* KeyCap.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21A168927BCD2F70053DB67 /* KeyCap.swift */; };
+		C2D684D127C4870E00754AE9 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D684D027C4870E00754AE9 /* GameView.swift */; };
+		C2D684D327C488CB00754AE9 /* Color+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D684D227C488CB00754AE9 /* Color+Assets.swift */; };
+		C2D684D527C488D700754AE9 /* Image+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D684D427C488D700754AE9 /* Image+Assets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +23,10 @@
 		C21A167627BCCDF30053DB67 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C21A167827BCCDF40053DB67 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C21A167B27BCCDF40053DB67 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C21A168927BCD2F70053DB67 /* KeyCap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyCap.swift; sourceTree = "<group>"; };
+		C2D684D027C4870E00754AE9 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		C2D684D227C488CB00754AE9 /* Color+Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Assets.swift"; sourceTree = "<group>"; };
+		C2D684D427C488D700754AE9 /* Image+Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Assets.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +78,8 @@
 			isa = PBXGroup;
 			children = (
 				C21A167827BCCDF40053DB67 /* Assets.xcassets */,
+				C2D684D227C488CB00754AE9 /* Color+Assets.swift */,
+				C2D684D427C488D700754AE9 /* Image+Assets.swift */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -96,6 +106,7 @@
 		C21A168527BCCE640053DB67 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C21A168927BCD2F70053DB67 /* KeyCap.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -103,6 +114,7 @@
 		C21A168627BCCE750053DB67 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				C2D684D027C4870E00754AE9 /* GameView.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -177,8 +189,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2D684D327C488CB00754AE9 /* Color+Assets.swift in Sources */,
 				C21A167727BCCDF30053DB67 /* ContentView.swift in Sources */,
 				C21A167527BCCDF30053DB67 /* WordleApp.swift in Sources */,
+				C2D684D127C4870E00754AE9 /* GameView.swift in Sources */,
+				C2D684D527C488D700754AE9 /* Image+Assets.swift in Sources */,
+				C21A168A27BCD2F70053DB67 /* KeyCap.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
