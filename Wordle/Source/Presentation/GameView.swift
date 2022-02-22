@@ -7,7 +7,7 @@ struct GameView: View {
         NavigationView {
             VStack {
                 if let puzzle = vm.currentPuzzle {
-                    GameBoard(puzzle: puzzle) { vm.loadRandomPuzzle() }
+                    GameBoard(puzzle: puzzle, allWorld: vm.wordSet) { vm.loadRandomPuzzle() }
                 }
             }
             .navigationViewStyle(.stack)

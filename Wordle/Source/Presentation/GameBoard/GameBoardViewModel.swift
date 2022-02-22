@@ -13,6 +13,7 @@ public enum GameConstants {
 
 class GameBoardViewModel: ObservableObject {
     let puzzle: Puzzle
+    let allWorld: Set<String>
     @Published var status: GameStatus = .playing
     @Published private(set) var appliedGuesses: [Guess] = []
     @Published private(set) var currentGuess: Guess
@@ -23,8 +24,9 @@ class GameBoardViewModel: ObservableObject {
         status == .playing ? appliedGuesses + [currentGuess] : appliedGuesses
     }
 
-    init(puzzle: Puzzle) {
+    init(puzzle: Puzzle, allWorld: Set<String>) {
         self.puzzle = puzzle
+        self.allWorld = allWorld
         guessStatus = .init(puzzle: puzzle, guessed: [])
         currentGuess = puzzle.createEmptyGuess(index: 0)
     }
@@ -32,7 +34,7 @@ class GameBoardViewModel: ObservableObject {
     // MARK: - Public Method
 
     func apply() {
-        guard currentGuess.guessLetters.count == puzzle.word.count else {
+        guard currentGuess.guessLetters.count == puzzle.word.count, allWorld.contains(currentGuess.word) else {
             performWrongAttempAnimation()
             return
         }
@@ -73,18 +75,18 @@ class GameBoardViewModel: ObservableObject {
     // MARK: Wrong Attemp Animation
 
     private func performWrongAttempAnimation() {
-        withAnimation(.easeIn(duration: 0.1).repeatCount(5, autoreverses: true)) {
+        withAnimation(.easeIn(duration: 0.08).repeatCount(5, autoreverses: true)) {
             wrongAttemp = true
         }
         Task {
-            try await Task.sleep(nanoseconds: 500_000_000)
+            try await Task.sleep(nanoseconds: 400_000_000)
             await resetWrongAttemp()
         }
     }
 
     @MainActor
     private func resetWrongAttemp() {
-        withAnimation(.easeIn(duration: 0.1)) {
+        withAnimation(.easeIn(duration: 0.08)) {
             wrongAttemp = false
         }
     }

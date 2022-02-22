@@ -14,7 +14,7 @@ public struct GuessView: View {
                     .fontWeight(.black)
                     .cardify(isFlipped: guess.isFlipped[index],
                              guessResult: puzzle.guess(guess[index], at: index))
-                    .frame(width: 60, height: 60, alignment: .center)
+                    .frame(width: 56, height: 56, alignment: .center)
             }
         }
         .font(.title)

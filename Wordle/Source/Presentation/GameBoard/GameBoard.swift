@@ -4,8 +4,8 @@ struct GameBoard: View {
     @ObservedObject private var vm: GameBoardViewModel
     var playAgain: () -> ()
 
-    init(puzzle: Puzzle, playAgain: @escaping () -> ()) {
-        _vm = .init(initialValue: .init(puzzle: puzzle))
+    init(puzzle: Puzzle, allWorld: Set<String>, playAgain: @escaping () -> ()) {
+        _vm = .init(initialValue: .init(puzzle: puzzle, allWorld: allWorld))
         self.playAgain = playAgain
     }
 
@@ -14,7 +14,7 @@ struct GameBoard: View {
             VStack(spacing: 16) {
                 ForEach(vm.allGuesses) { guess in
                     GuessView(puzzle: vm.puzzle, guess: guess)
-                        .offset(x: vm.wrongAttemp ? -30 : 0)
+                        .offset(x: vm.currentGuess.id == guess.id && vm.wrongAttemp ? -30 : 0)
                 }
             }
             .padding(.top)
@@ -45,7 +45,6 @@ struct GameBoard: View {
             }
         }
     }
-
 
     private var playAgainView: some View {
         Button {
