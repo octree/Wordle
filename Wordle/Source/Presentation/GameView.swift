@@ -1,10 +1,14 @@
 import SwiftUI
 
 struct GameView: View {
+    @StateObject private var vm: GameViewModel = .init()
+
     var body: some View {
         NavigationView {
             VStack {
-                GameBoard(puzzle: .init(word: "OTHER"))
+                if let puzzle = vm.currentPuzzle {
+                    GameBoard(puzzle: puzzle) { vm.loadRandomPuzzle() }
+                }
             }
             .navigationViewStyle(.stack)
             .navigationBarTitleDisplayMode(.inline)

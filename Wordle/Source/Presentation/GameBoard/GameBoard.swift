@@ -2,9 +2,11 @@ import SwiftUI
 
 struct GameBoard: View {
     @ObservedObject private var vm: GameBoardViewModel
+    var playAgain: () -> ()
 
-    init(puzzle: Puzzle) {
+    init(puzzle: Puzzle, playAgain: @escaping () -> ()) {
         _vm = .init(initialValue: .init(puzzle: puzzle))
+        self.playAgain = playAgain
     }
 
     var body: some View {
@@ -23,10 +25,34 @@ struct GameBoard: View {
             case .playing:
                 Keyboard(guessStatus: vm.guessStatus) { vm.onTap(key: $0) }.padding()
             case .lose:
-                Text("Lose")
+                VStack {
+                    Text("You Lose!")
+                        .font(.largeTitle)
+                        .fontWeight(.heavy)
+                        .foregroundColor(.red)
+                    playAgainView
+                }
+                .padding()
             case .won:
-                Text("Won")
+                VStack {
+                    Text("You Won!")
+                        .font(.largeTitle)
+                        .fontWeight(.heavy)
+                        .foregroundColor(.green)
+                    playAgainView
+                }
+                .padding()
             }
         }
+    }
+
+
+    private var playAgainView: some View {
+        Button {
+            playAgain()
+        } label: {
+            Text("Play Again")
+        }
+        .buttonStyle(.bordered)
     }
 }
