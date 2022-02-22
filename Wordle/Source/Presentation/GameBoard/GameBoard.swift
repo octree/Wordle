@@ -4,8 +4,8 @@ struct GameBoard: View {
     @ObservedObject private var vm: GameBoardViewModel
     var playAgain: () -> ()
 
-    init(puzzle: Puzzle, allWorld: Set<String>, playAgain: @escaping () -> ()) {
-        _vm = .init(initialValue: .init(puzzle: puzzle, allWorld: allWorld))
+    init(puzzle: Puzzle, guesses: [Guess], allWorld: Set<String>, playAgain: @escaping () -> ()) {
+        _vm = .init(initialValue: .init(puzzle: puzzle, guesses: guesses, allWorld: allWorld))
         self.playAgain = playAgain
     }
 

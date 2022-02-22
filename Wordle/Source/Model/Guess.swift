@@ -33,6 +33,19 @@ public struct Puzzle {
     }
 }
 
+extension Puzzle: Codable {
+    public init(from decoder: Decoder) throws {
+        let single = try decoder.singleValueContainer()
+        self.word = try single.decode(String.self)
+        self.letterSet = Set(word.map { $0 })
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var single = encoder.singleValueContainer()
+        try single.encode(word)
+    }
+}
+
 public struct Guess {
     public let index: Int
     public var guessLetters: [Character]
@@ -83,5 +96,55 @@ public struct GuessStatus {
         guard case let .character(c) = key,
               guessed.contains(c) else { return .unused }
         return puzzle.contains(letter: c) ? .used : .wrong
+    }
+}
+
+extension Guess: Codable {
+    enum CodingKeys: String, CodingKey {
+        case index
+        case guessLetters
+        case isFlipped
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.index = try container.decode(Int.self, forKey: .index)
+        self.guessLetters = try container.decode([String].self, forKey: .guessLetters)
+            .map { $0.first! }
+        self.isFlipped = try container.decode([Bool].self, forKey: .isFlipped)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var conatiner = encoder.container(keyedBy: CodingKeys.self)
+        try conatiner.encode(index, forKey: .index)
+        try conatiner.encode(guessLetters.map { String($0) }, forKey: .guessLetters)
+        try conatiner.encode(isFlipped, forKey: .isFlipped)
+    }
+}
+
+public struct PersistedPuzzle: Codable {
+    public var puzzle: Puzzle
+    public var guesses: [Guess]
+}
+
+extension PersistedPuzzle {
+    private static var url: URL {
+        FileManager.default
+            .urls(for: .documentDirectory, in: .userDomainMask).first!
+            .appendingPathComponent("puzzle.json")
+    }
+
+    static func read() -> PersistedPuzzle? {
+        guard let data = try? Data(contentsOf: url) else { return nil }
+        return try? JSONDecoder().decode(PersistedPuzzle.self, from: data)
+    }
+
+    func save() {
+        guard let data = try? JSONEncoder().encode(self) else { return }
+        try? data.write(to: Self.url)
+    }
+
+    static func clear() {
+        try? FileManager.default.removeItem(at: url)
     }
 }

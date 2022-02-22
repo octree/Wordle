@@ -25,11 +25,17 @@ class GameBoardViewModel: ObservableObject {
         status == .playing ? appliedGuesses + [currentGuess] : appliedGuesses
     }
 
-    init(puzzle: Puzzle, allWorld: Set<String>) {
+    init(puzzle: Puzzle, guesses: [Guess], allWorld: Set<String>) {
         self.puzzle = puzzle
         self.allWorld = allWorld
-        guessStatus = .init(puzzle: puzzle, guessed: [])
-        currentGuess = puzzle.createEmptyGuess(index: 0)
+        appliedGuesses = guesses
+        let guessedLetters: Set<Character> = guesses.reduce(Set()) {
+            $0.intersection(Set($1.guessLetters))
+        }
+
+        guessStatus = .init(puzzle: puzzle, guessed: guessedLetters)
+        currentGuess = puzzle.createEmptyGuess(index: guesses.count)
+        saveToDisk()
     }
 
     // MARK: - Public Method
@@ -38,6 +44,18 @@ class GameBoardViewModel: ObservableObject {
         guard currentGuess.guessLetters.count == puzzle.word.count, allWorld.contains(currentGuess.word) else {
             performWrongAttempAnimation()
             return
+        }
+        defer {
+            switch status {
+            case .won:
+                fallthrough
+            case .lose:
+                print("💧 Clear Puzzle Cache")
+                PersistedPuzzle.clear()
+            case .playing:
+                saveToDisk()
+                print("💧 Save Puzzle To Disk")
+            }
         }
         appliedGuesses.append(currentGuess)
         currentGuess.guessLetters.forEach {
@@ -110,6 +128,13 @@ class GameBoardViewModel: ObservableObject {
             withAnimation(.easeInOut(duration: 0.75).delay(Double(index) * 0.1)) {
                 appliedGuesses[last].isFlipped[index] = true
             }
+        }
+    }
+
+    private func saveToDisk() {
+        Task {
+            PersistedPuzzle(puzzle: self.puzzle, guesses: self.appliedGuesses)
+                .save()
         }
     }
 }

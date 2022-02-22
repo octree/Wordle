@@ -10,7 +10,7 @@ struct GameView: View {
                 Rectangle().fill(Color.Assets.Background.primary)
                     .ignoresSafeArea()
                 if let puzzle = vm.currentPuzzle {
-                    GameBoard(puzzle: puzzle, allWorld: vm.wordSet) { vm.loadRandomPuzzle() }
+                    GameBoard(puzzle: puzzle, guesses: vm.guesses, allWorld: vm.wordSet) { vm.loadRandomPuzzle() }
                 }
             }
             .navigationViewStyle(.stack)
