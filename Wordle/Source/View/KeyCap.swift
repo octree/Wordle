@@ -1,25 +1,33 @@
 import SwiftUI
 
 struct KeyCap: View {
-    var body: some View {
-        Text("A")
-            .foregroundColor(Color("Keyboard/text"))
-            .padding()
-            .background(Color("Keyboard/background"))
-            .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
-            .overlay(
-                RoundedRectangle(cornerRadius: 8, style: .continuous)
-                    .stroke(Color("Keyboard/border"), lineWidth: 2)
-            )
-    }
-}
+    var key: Key
+    var status: KeyStatus = .idle
 
-struct KeyCap_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            KeyCap()
+    var body: some View {
+        Group {
+            switch key {
+            case .character(let character):
+                Text(String(character))
+            case .enter:
+                Image(systemName: "return")
+            case .delete:
+                Image(systemName: "delete.left")
+            }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(white: 0.7))
+        .background(backgroundColor)
+        .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+    }
+
+    private var backgroundColor: Color {
+        switch status {
+        case .idle:
+            return Color(white: 0.9)
+        case .used:
+            return Color.Assets.Wordle.correct
+        case .unused:
+            return Color.Assets.Wordle.unused
+        }
     }
 }

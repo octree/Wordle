@@ -3,32 +3,34 @@ import SwiftUI
 struct GameView: View {
     var body: some View {
         NavigationView {
-            VStack {}
-                .navigationViewStyle(.stack)
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
+            VStack {
+                GameBoard(puzzle: .init(word: "OTHER"))
+            }
+            .navigationViewStyle(.stack)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {} label: {
+                        Image(systemName: "questionmark.circle")
+                    }
+                }
+
+                ToolbarItem(placement: .principal) {
+                    Text("Wordle").font(.largeTitle).fontWeight(.heavy)
+                }
+
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    HStack {
                         Button {} label: {
-                            Image(systemName: "questionmark.circle")
+                            Image(systemName: "chart.bar")
                         }
-                    }
 
-                    ToolbarItem(placement: .principal) {
-                        Text("Wordle").font(.largeTitle).fontWeight(.heavy)
-                    }
-
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        HStack {
-                            Button {} label: {
-                                Image(systemName: "chart.bar")
-                            }
-
-                            Button {} label: {
-                                Image(systemName: "gearshape")
-                            }
+                        Button {} label: {
+                            Image(systemName: "gearshape")
                         }
                     }
                 }
+            }
         }
     }
 }
