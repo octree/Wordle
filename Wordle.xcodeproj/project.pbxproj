@@ -27,6 +27,8 @@
 		C2D684F027C4C97400754AE9 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D684EF27C4C97400754AE9 /* GameViewModel.swift */; };
 		C2D684F227C4D90E00754AE9 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D684F127C4D90E00754AE9 /* Card.swift */; };
 		C2D684F427C4DD4000754AE9 /* CardColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D684F327C4DD4000754AE9 /* CardColors.swift */; };
+		C2D684F627C51B4D00754AE9 /* UIColor+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D684F527C51B4D00754AE9 /* UIColor+Image.swift */; };
+		C2D684F927C51D0200754AE9 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D684F827C51D0200754AE9 /* HelpView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +53,8 @@
 		C2D684EF27C4C97400754AE9 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		C2D684F127C4D90E00754AE9 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		C2D684F327C4DD4000754AE9 /* CardColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardColors.swift; sourceTree = "<group>"; };
+		C2D684F527C51B4D00754AE9 /* UIColor+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Image.swift"; sourceTree = "<group>"; };
+		C2D684F827C51D0200754AE9 /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +147,7 @@
 		C21A168627BCCE750053DB67 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				C2D684F727C51CF800754AE9 /* Help */,
 				C2D684E827C4BA7800754AE9 /* Keyboard */,
 				C2D684E327C4ABFF00754AE9 /* GameBoard */,
 				C2D684D027C4870E00754AE9 /* GameView.swift */,
@@ -174,6 +179,7 @@
 			children = (
 				C2D684E127C4AABC00754AE9 /* String+Extensions.swift */,
 				C2D684F327C4DD4000754AE9 /* CardColors.swift */,
+				C2D684F527C51B4D00754AE9 /* UIColor+Image.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -193,6 +199,14 @@
 				C2D684E927C4BA8100754AE9 /* Keyboard.swift */,
 			);
 			path = Keyboard;
+			sourceTree = "<group>";
+		};
+		C2D684F727C51CF800754AE9 /* Help */ = {
+			isa = PBXGroup;
+			children = (
+				C2D684F827C51D0200754AE9 /* HelpView.swift */,
+			);
+			path = Help;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,11 +285,13 @@
 				C2D684D927C48A5000754AE9 /* Guess.swift in Sources */,
 				C2D684F027C4C97400754AE9 /* GameViewModel.swift in Sources */,
 				C2D684DF27C4A90F00754AE9 /* GameBoard.swift in Sources */,
+				C2D684F627C51B4D00754AE9 /* UIColor+Image.swift in Sources */,
 				C2D684D327C488CB00754AE9 /* Color.Generated.swift in Sources */,
 				C2D684E527C4AC1100754AE9 /* GameBoardViewModel.swift in Sources */,
 				C2D684EA27C4BA8100754AE9 /* Keyboard.swift in Sources */,
 				C2D684DD27C48CB800754AE9 /* Cardify.swift in Sources */,
 				C21A167727BCCDF30053DB67 /* ContentView.swift in Sources */,
+				C2D684F927C51D0200754AE9 /* HelpView.swift in Sources */,
 				C21A167527BCCDF30053DB67 /* WordleApp.swift in Sources */,
 				C2D684E727C4ACB200754AE9 /* GuessView.swift in Sources */,
 				C2D684D127C4870E00754AE9 /* GameView.swift in Sources */,

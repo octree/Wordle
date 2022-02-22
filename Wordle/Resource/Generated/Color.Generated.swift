@@ -16,6 +16,14 @@ extension Color {
             return Color("AccentColor")
         }
 
+        // MARK: - Background
+
+        public enum Background {
+            public static var primary: Color {
+                return Color("Background/Primary")
+            }
+        }
+
         // MARK: - Guess
 
         public enum Guess {

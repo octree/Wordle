@@ -2,10 +2,13 @@ import SwiftUI
 
 struct GameView: View {
     @StateObject private var vm: GameViewModel = .init()
+    @State private var showingHelper: Bool = false
 
     var body: some View {
         NavigationView {
-            VStack {
+            ZStack {
+                Rectangle().fill(Color.Assets.Background.primary)
+                    .ignoresSafeArea()
                 if let puzzle = vm.currentPuzzle {
                     GameBoard(puzzle: puzzle, allWorld: vm.wordSet) { vm.loadRandomPuzzle() }
                 }
@@ -14,10 +17,15 @@ struct GameView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button {} label: {
+                    Button {
+                        self.showingHelper.toggle()
+                    } label: {
                         Image(systemName: "questionmark.circle")
                     }
-                    .tint(.Assets.Text.primary)
+                    .tint(.Assets.Text.secondary)
+                    .sheet(isPresented: $showingHelper) {
+                        HelpView(isPresented: $showingHelper)
+                    }
                 }
 
                 ToolbarItem(placement: .principal) {
@@ -34,7 +42,7 @@ struct GameView: View {
                             Image(systemName: "gearshape")
                         }
                     }
-                    .tint(.Assets.Text.primary)
+                    .tint(.Assets.Text.secondary)
                 }
             }
         }
