@@ -17,6 +17,7 @@ struct GameView: View {
                     Button {} label: {
                         Image(systemName: "questionmark.circle")
                     }
+                    .tint(.Assets.Text.primary)
                 }
 
                 ToolbarItem(placement: .principal) {
@@ -33,6 +34,7 @@ struct GameView: View {
                             Image(systemName: "gearshape")
                         }
                     }
+                    .tint(.Assets.Text.primary)
                 }
             }
         }

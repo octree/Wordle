@@ -4,7 +4,7 @@ import SwiftUI
 public enum LetterGuessResult: Equatable {
     case correct
     case misplaced
-    case unused
+    case wrong
 }
 
 public struct Puzzle {
@@ -27,7 +27,7 @@ public struct Puzzle {
     }
 
     public func guess(_ letter: Character, at index: Int) -> LetterGuessResult {
-        guard contains(letter: letter) else { return .unused }
+        guard contains(letter: letter) else { return .wrong }
         let letterIndex = word.index(word.startIndex, offsetBy: index)
         return word[letterIndex] == letter ? .correct : .misplaced
     }
@@ -70,8 +70,8 @@ extension Guess: Identifiable {
 }
 
 public enum KeyStatus {
-    case idle
     case used
+    case wrong
     case unused
 }
 
@@ -81,7 +81,7 @@ public struct GuessStatus {
 
     public func status(forKey key: Key) -> KeyStatus {
         guard case let .character(c) = key,
-              guessed.contains(c) else { return .idle }
-        return puzzle.contains(letter: c) ? .used : .unused
+              guessed.contains(c) else { return .unused }
+        return puzzle.contains(letter: c) ? .used : .wrong
     }
 }

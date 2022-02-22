@@ -1,18 +1,5 @@
 import SwiftUI
 
-extension LetterGuessResult {
-    var color: Color {
-        switch self {
-        case .correct:
-            return .Assets.Wordle.correct
-        case .misplaced:
-            return .Assets.Wordle.misplaced
-        case .unused:
-            return .Assets.Wordle.unused
-        }
-    }
-}
-
 struct Cardify: Animatable, ViewModifier {
     var rotationInDegrees: Double
     var guessResult: LetterGuessResult
@@ -28,18 +15,15 @@ struct Cardify: Animatable, ViewModifier {
 
     func body(content: Content) -> some View {
         ZStack {
-            let shape = RoundedRectangle(cornerRadius: 12, style: .continuous)
             if rotationInDegrees < 90 {
-                shape.fill()
-                    .foregroundColor(guessResult.color)
-                content
-
+                let provider = guessResult.colorProvider
+                Card(color: provider, borderWidth: 4)
+                content.foregroundColor(provider.extra)
             } else {
-                shape.fill()
-                    .foregroundColor(.white)
-                content
+                let provider = Color.Assets.Guess.Unused.self
+                Card(color: provider, borderWidth: 4)
+                content.foregroundColor(provider.extra)
                     .rotation3DEffect(Angle(degrees: 180), axis: (0, 1, 0))
-                shape.stroke(Color.gray, lineWidth: 2)
             }
         }
         .rotation3DEffect(Angle(degrees: rotationInDegrees), axis: (0, 1, 0))
@@ -49,5 +33,19 @@ struct Cardify: Animatable, ViewModifier {
 extension View {
     func cardify(isFlipped: Bool, guessResult: LetterGuessResult) -> some View {
         modifier(Cardify(isFlipped: isFlipped, guessResult: guessResult))
+    }
+}
+
+extension LetterGuessResult {
+    var colorProvider: WordleColorProvider.Type {
+        typealias G = Color.Assets.Guess
+        switch self {
+        case .correct:
+            return G.Correct.self
+        case .misplaced:
+            return G.Misplaced.self
+        case .wrong:
+            return G.Wrong.self
+        }
     }
 }

@@ -25,6 +25,8 @@
 		C2D684EC27C4C89900754AE9 /* wordle.txt in Resources */ = {isa = PBXBuildFile; fileRef = C2D684EB27C4C89900754AE9 /* wordle.txt */; };
 		C2D684EE27C4C8C200754AE9 /* PuzzleLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D684ED27C4C8C200754AE9 /* PuzzleLoader.swift */; };
 		C2D684F027C4C97400754AE9 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D684EF27C4C97400754AE9 /* GameViewModel.swift */; };
+		C2D684F227C4D90E00754AE9 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D684F127C4D90E00754AE9 /* Card.swift */; };
+		C2D684F427C4DD4000754AE9 /* CardColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D684F327C4DD4000754AE9 /* CardColors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +49,8 @@
 		C2D684EB27C4C89900754AE9 /* wordle.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wordle.txt; sourceTree = "<group>"; };
 		C2D684ED27C4C8C200754AE9 /* PuzzleLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleLoader.swift; sourceTree = "<group>"; };
 		C2D684EF27C4C97400754AE9 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
+		C2D684F127C4D90E00754AE9 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		C2D684F327C4DD4000754AE9 /* CardColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardColors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +135,7 @@
 				C21A168927BCD2F70053DB67 /* KeyCap.swift */,
 				C2D684DC27C48CB800754AE9 /* Cardify.swift */,
 				C2D684E627C4ACB200754AE9 /* GuessView.swift */,
+				C2D684F127C4D90E00754AE9 /* Card.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -168,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				C2D684E127C4AABC00754AE9 /* String+Extensions.swift */,
+				C2D684F327C4DD4000754AE9 /* CardColors.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -275,6 +281,8 @@
 				C2D684D127C4870E00754AE9 /* GameView.swift in Sources */,
 				C2D684D527C488D700754AE9 /* Image.Generated.swift in Sources */,
 				C21A168A27BCD2F70053DB67 /* KeyCap.swift in Sources */,
+				C2D684F227C4D90E00754AE9 /* Card.swift in Sources */,
+				C2D684F427C4DD4000754AE9 /* CardColors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

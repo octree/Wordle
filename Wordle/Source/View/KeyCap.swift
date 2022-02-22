@@ -2,10 +2,11 @@ import SwiftUI
 
 struct KeyCap: View {
     var key: Key
-    var status: KeyStatus = .idle
+    var status: KeyStatus = .unused
 
     var body: some View {
-        Group {
+        ZStack {
+            Card(color: colorProvider, cornerRadius: 10, borderWidth: 2)
             switch key {
             case .character(let character):
                 Text(String(character))
@@ -15,19 +16,18 @@ struct KeyCap: View {
                 Image(systemName: "delete.left")
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(backgroundColor)
-        .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+        .foregroundColor(colorProvider.extra)
     }
 
-    private var backgroundColor: Color {
+    private var colorProvider: WordleColorProvider.Type {
+        typealias G = Color.Assets.Guess
         switch status {
-        case .idle:
-            return Color(white: 0.9)
+        case .wrong:
+            return G.Wrong.self
         case .used:
-            return Color.Assets.Wordle.correct
+            return G.Correct.self
         case .unused:
-            return Color.Assets.Wordle.unused
+            return G.Unused.self
         }
     }
 }

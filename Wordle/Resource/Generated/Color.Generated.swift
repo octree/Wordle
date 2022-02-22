@@ -16,39 +16,87 @@ extension Color {
             return Color("AccentColor")
         }
 
-        // MARK: - Keyboard
+        // MARK: - Guess
 
-        public enum Keyboard {
-            public static var background: Color {
-                return Color("Keyboard/background")
+        public enum Guess {
+            // MARK: - Correct
+
+            public enum Correct {
+                public static var dark: Color {
+                    return Color("Guess/Correct/dark")
+                }
+
+                public static var extra: Color {
+                    return Color("Guess/Correct/extra")
+                }
+
+                public static var light: Color {
+                    return Color("Guess/Correct/light")
+                }
             }
 
-            public static var border: Color {
-                return Color("Keyboard/border")
+            // MARK: - Misplaced
+
+            public enum Misplaced {
+                public static var dark: Color {
+                    return Color("Guess/Misplaced/dark")
+                }
+
+                public static var extra: Color {
+                    return Color("Guess/Misplaced/extra")
+                }
+
+                public static var light: Color {
+                    return Color("Guess/Misplaced/light")
+                }
             }
 
-            public static var text: Color {
-                return Color("Keyboard/text")
+            // MARK: - Unused
+
+            public enum Unused {
+                public static var dark: Color {
+                    return Color("Guess/Unused/dark")
+                }
+
+                public static var extra: Color {
+                    return Color("Guess/Unused/extra")
+                }
+
+                public static var light: Color {
+                    return Color("Guess/Unused/light")
+                }
+            }
+
+            // MARK: - Wrong
+
+            public enum Wrong {
+                public static var dark: Color {
+                    return Color("Guess/Wrong/dark")
+                }
+
+                public static var extra: Color {
+                    return Color("Guess/Wrong/extra")
+                }
+
+                public static var light: Color {
+                    return Color("Guess/Wrong/light")
+                }
             }
         }
 
-        // MARK: - Wordle
+        // MARK: - Text
 
-        public enum Wordle {
-            public static var correct: Color {
-                return Color("Wordle/correct")
+        public enum Text {
+            public static var primary: Color {
+                return Color("Text/Primary")
             }
 
-            public static var misplaced: Color {
-                return Color("Wordle/misplaced")
+            public static var secondary: Color {
+                return Color("Text/Secondary")
             }
 
-            public static var unused: Color {
-                return Color("Wordle/unused")
-            }
-
-            public static var wrong: Color {
-                return Color("Wordle/wrong")
+            public static var territory: Color {
+                return Color("Text/Territory")
             }
         }
     }

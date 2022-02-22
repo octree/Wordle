@@ -11,7 +11,7 @@ struct GameBoard: View {
 
     var body: some View {
         VStack {
-            VStack {
+            VStack(spacing: 16) {
                 ForEach(vm.allGuesses) { guess in
                     GuessView(puzzle: vm.puzzle, guess: guess)
                         .offset(x: vm.wrongAttemp ? -30 : 0)
