@@ -72,3 +72,24 @@ public extension Puzzle {
               isFlipped: word.map { _ in false })
     }
 }
+
+public extension Puzzle {
+    func keyStatus(from guess: Guess) -> [Key: KeyStatus] {
+        var result = [Key: KeyStatus]()
+        guess.guessLetters.forEach {
+            result[.character($0)] = contains(letter: $0) ? .used : .wrong
+        }
+        return result
+    }
+
+    func keyStatus(from guesses: [Guess]) -> [Key: KeyStatus] {
+        guesses.map { keyStatus(from: $0) }
+            .reduce([:]) {
+                $0.merging($1) { $1 }
+            }
+    }
+
+    func mergeKeyStatus(from guess: Guess, to status: inout [Key: KeyStatus]) {
+        status.merge(keyStatus(from: guess)) { $1 }
+    }
+}

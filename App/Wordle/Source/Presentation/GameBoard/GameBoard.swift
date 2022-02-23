@@ -53,7 +53,7 @@ struct GameBoard: View {
             Spacer()
             switch vm.status {
             case .playing:
-                Keyboard(guessStatus: vm.guessStatus) { vm.onTap(key: $0) }.padding()
+                Keyboard(keyStatus: vm.keyStatus) { vm.onTap(key: $0) }.padding()
             case .lose:
                 VStack {
                     Text("You Lose! \(vm.puzzle.word)")

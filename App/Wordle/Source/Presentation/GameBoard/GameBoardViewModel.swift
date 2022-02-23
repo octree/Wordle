@@ -44,7 +44,7 @@ class GameBoardViewModel: ObservableObject {
     @Published private(set) var appliedGuesses: [Guess] = []
     @Published private(set) var currentGuess: Guess
     @Published private(set) var wrongAttemp: Bool = false
-    @Published private(set) var guessStatus: GuessStatus
+    @Published private(set) var keyStatus: [Key: KeyStatus]
     var proxy: ScrollViewProxy?
 
     var allGuesses: [Guess] {
@@ -55,11 +55,7 @@ class GameBoardViewModel: ObservableObject {
         self.puzzle = puzzle
         self.allWorld = allWorld
         appliedGuesses = guesses
-        let guessedLetters: Set<Character> = guesses.reduce(Set()) {
-            $0.union(Set($1.guessLetters))
-        }
-
-        guessStatus = .init(puzzle: puzzle, guessed: guessedLetters)
+        keyStatus = puzzle.keyStatus(from: guesses)
         currentGuess = puzzle.createEmptyGuess(index: guesses.count)
         saveToDisk()
     }
@@ -84,9 +80,7 @@ class GameBoardViewModel: ObservableObject {
             }
         }
         appliedGuesses.append(currentGuess)
-        currentGuess.guessLetters.forEach {
-            guessStatus.guessed.insert($0)
-        }
+        puzzle.mergeKeyStatus(from: currentGuess, to: &keyStatus)
         if currentGuess.word == puzzle.word {
             status = .won
         } else if appliedGuesses.count == GameConstants.maxAttempCount {

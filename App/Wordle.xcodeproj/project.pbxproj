@@ -14,7 +14,6 @@
 		C21A168A27BCD2F70053DB67 /* KeyCap.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21A168927BCD2F70053DB67 /* KeyCap.swift */; };
 		C23C3AB627C5C4E3004BA93A /* Puzzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23C3AB527C5C4E3004BA93A /* Puzzle.swift */; };
 		C23C3AB827C5C50A004BA93A /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23C3AB727C5C50A004BA93A /* Key.swift */; };
-		C23C3ABA27C5C513004BA93A /* GuessState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23C3AB927C5C513004BA93A /* GuessState.swift */; };
 		C23C3ABC27C5C545004BA93A /* PersistedPuzzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23C3ABB27C5C545004BA93A /* PersistedPuzzle.swift */; };
 		C2D684D127C4870E00754AE9 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D684D027C4870E00754AE9 /* GameView.swift */; };
 		C2D684D327C488CB00754AE9 /* Color.Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D684D227C488CB00754AE9 /* Color.Generated.swift */; };
@@ -44,7 +43,6 @@
 		C21A168927BCD2F70053DB67 /* KeyCap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyCap.swift; sourceTree = "<group>"; };
 		C23C3AB527C5C4E3004BA93A /* Puzzle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Puzzle.swift; sourceTree = "<group>"; };
 		C23C3AB727C5C50A004BA93A /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
-		C23C3AB927C5C513004BA93A /* GuessState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuessState.swift; sourceTree = "<group>"; };
 		C23C3ABB27C5C545004BA93A /* PersistedPuzzle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistedPuzzle.swift; sourceTree = "<group>"; };
 		C2D684D027C4870E00754AE9 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		C2D684D227C488CB00754AE9 /* Color.Generated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.Generated.swift; sourceTree = "<group>"; };
@@ -180,7 +178,6 @@
 				C2D684ED27C4C8C200754AE9 /* PuzzleLoader.swift */,
 				C23C3AB527C5C4E3004BA93A /* Puzzle.swift */,
 				C23C3AB727C5C50A004BA93A /* Key.swift */,
-				C23C3AB927C5C513004BA93A /* GuessState.swift */,
 				C23C3ABB27C5C545004BA93A /* PersistedPuzzle.swift */,
 			);
 			path = Model;
@@ -310,7 +307,6 @@
 				C23C3AB827C5C50A004BA93A /* Key.swift in Sources */,
 				C2D684E727C4ACB200754AE9 /* GuessView.swift in Sources */,
 				C2D684D127C4870E00754AE9 /* GameView.swift in Sources */,
-				C23C3ABA27C5C513004BA93A /* GuessState.swift in Sources */,
 				C2D684D527C488D700754AE9 /* Image.Generated.swift in Sources */,
 				C21A168A27BCD2F70053DB67 /* KeyCap.swift in Sources */,
 				C2D684F227C4D90E00754AE9 /* Card.swift in Sources */,

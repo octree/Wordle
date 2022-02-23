@@ -27,7 +27,7 @@
 import SwiftUI
 
 struct Keyboard: View {
-    var guessStatus: GuessStatus
+    var keyStatus: [Key: KeyStatus]
     var onTap: (Key) -> Void
 
     var body: some View {
@@ -36,13 +36,13 @@ struct Keyboard: View {
             VStack(spacing: KeyboardConstants.keySpacing) {
                 HStack(spacing: KeyboardConstants.keySpacing) {
                     ForEach(Key.groupedCharacterKeys[0], id: \.self) { key in
-                        KeyCap(key: key, status: guessStatus.status(forKey: key))
+                        KeyCap(key: key, status: keyStatus[key] ?? .unused)
                             .onTapGesture { onTap(key) }
                     }
                 }
                 HStack(spacing: KeyboardConstants.keySpacing) {
                     ForEach(Key.groupedCharacterKeys[1], id: \.self) { key in
-                        KeyCap(key: key, status: guessStatus.status(forKey: key))
+                        KeyCap(key: key, status: keyStatus[key] ?? .unused)
                             .onTapGesture { onTap(key) }
                     }
                 }
@@ -51,7 +51,7 @@ struct Keyboard: View {
                     KeyCap(key: .enter).frame(width: 3 / 2 * keyWidth)
                         .onTapGesture { onTap(.enter) }
                     ForEach(Key.groupedCharacterKeys[2], id: \.self) { key in
-                        KeyCap(key: key, status: guessStatus.status(forKey: key))
+                        KeyCap(key: key, status: keyStatus[key] ?? .unused)
                             .onTapGesture { onTap(key) }
                     }
                     KeyCap(key: .delete).frame(width: 3 / 2 * keyWidth)
