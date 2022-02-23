@@ -35,13 +35,13 @@ struct Keyboard: View {
             let keyWidth = proxy.size.width / 10
             VStack(spacing: KeyboardConstants.keySpacing) {
                 HStack(spacing: KeyboardConstants.keySpacing) {
-                    ForEach(Key.groupedCharacterKeys[0], id: \.self) { key in
+                    ForEach(Key.groupedAlphaKeys[0], id: \.self) { key in
                         KeyCap(key: key, status: keyStatus[key] ?? .unused)
                             .onTapGesture { onTap(key) }
                     }
                 }
                 HStack(spacing: KeyboardConstants.keySpacing) {
-                    ForEach(Key.groupedCharacterKeys[1], id: \.self) { key in
+                    ForEach(Key.groupedAlphaKeys[1], id: \.self) { key in
                         KeyCap(key: key, status: keyStatus[key] ?? .unused)
                             .onTapGesture { onTap(key) }
                     }
@@ -50,7 +50,7 @@ struct Keyboard: View {
                 HStack(spacing: KeyboardConstants.keySpacing) {
                     KeyCap(key: .enter).frame(width: 3 / 2 * keyWidth)
                         .onTapGesture { onTap(.enter) }
-                    ForEach(Key.groupedCharacterKeys[2], id: \.self) { key in
+                    ForEach(Key.groupedAlphaKeys[2], id: \.self) { key in
                         KeyCap(key: key, status: keyStatus[key] ?? .unused)
                             .onTapGesture { onTap(key) }
                     }
