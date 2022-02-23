@@ -36,14 +36,22 @@ public struct GuessView: View {
                 if index != 0 {
                     Spacer()
                 }
+                let result = puzzle.guess(guess[index], at: index)
                 Text(String(guess[index]))
                     .fontWeight(.black)
                     .cardify(isFlipped: guess.isFlipped[index],
-                             guessResult: puzzle.guess(guess[index], at: index))
+                             guessResult: result,
+                             occurrences: puzzle.count(guess[index]))
                     .frame(width: 56, height: 56, alignment: .center)
             }
         }
         .padding(.horizontal)
         .font(.title)
+    }
+}
+
+extension Puzzle {
+    func count(_ character: Character) -> Int {
+        word.filter { $0 == character }.count
     }
 }

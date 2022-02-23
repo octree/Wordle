@@ -27,16 +27,19 @@
 import SwiftUI
 
 struct Cardify: Animatable, ViewModifier {
+    @Environment(\.difficulty) var difficulty: Difficulty
     var rotationInDegrees: Double
     var guessResult: LetterGuessResult
+    var occurrences: Int
     var animatableData: Double {
         get { rotationInDegrees }
         set { rotationInDegrees = newValue }
     }
 
-    init(isFlipped: Bool, guessResult: LetterGuessResult) {
+    init(isFlipped: Bool, guessResult: LetterGuessResult, occurrences: Int) {
         self.rotationInDegrees = isFlipped ? 0 : 180
         self.guessResult = guessResult
+        self.occurrences = occurrences
     }
 
     func body(content: Content) -> some View {
@@ -44,7 +47,16 @@ struct Cardify: Animatable, ViewModifier {
             if rotationInDegrees < 90 {
                 let provider = guessResult.colorProvider
                 Card(color: provider, borderWidth: 4)
-                content.foregroundColor(provider.extra)
+                Group {
+                    content
+                    if difficulty == .easy, occurrences > 0 {
+                        Text("\(occurrences)")
+                            .font(.caption)
+                            .padding(6)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                    }
+                }
+                .foregroundColor(provider.extra)
             } else {
                 let provider = Color.Assets.Guess.Unused.self
                 Card(color: provider, borderWidth: 4)
@@ -57,8 +69,8 @@ struct Cardify: Animatable, ViewModifier {
 }
 
 extension View {
-    func cardify(isFlipped: Bool, guessResult: LetterGuessResult) -> some View {
-        modifier(Cardify(isFlipped: isFlipped, guessResult: guessResult))
+    func cardify(isFlipped: Bool, guessResult: LetterGuessResult, occurrences: Int) -> some View {
+        modifier(Cardify(isFlipped: isFlipped, guessResult: guessResult, occurrences: occurrences))
     }
 }
 

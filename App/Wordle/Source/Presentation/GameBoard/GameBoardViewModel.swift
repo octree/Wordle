@@ -39,6 +39,7 @@ class GameBoardViewModel: ObservableObject {
     @Published private(set) var currentGuess: Guess
     @Published private(set) var wrongAttemp: Bool = false
     @Published private(set) var keyStatus: [Key: KeyStatus]
+    @Published private(set) var difficulty: Difficulty = .easy
     var proxy: ScrollViewProxy?
 
     var allGuesses: [Guess] {
@@ -50,6 +51,7 @@ class GameBoardViewModel: ObservableObject {
         let guesses: [Guess]
         if let game = PersistedGame.read() {
             state = game.state
+            difficulty = game.difficulty
             puzzle = game.puzzle
             guesses = game.guesses
         } else {
@@ -158,7 +160,10 @@ class GameBoardViewModel: ObservableObject {
 
     private func saveToDisk() {
         Task {
-            PersistedGame(state: state, puzzle: self.puzzle, guesses: self.appliedGuesses)
+            PersistedGame(state: state,
+                          puzzle: self.puzzle,
+                          difficulty: difficulty,
+                          guesses: self.appliedGuesses)
                 .save()
         }
     }

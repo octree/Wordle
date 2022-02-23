@@ -32,9 +32,15 @@ public enum GameState: String, Hashable, Equatable, Codable {
     case playing
 }
 
+public enum Difficulty: String, Hashable, Equatable, Codable {
+    case easy
+    case hard
+}
+
 public struct PersistedGame: Codable {
     public var state: GameState
     public var puzzle: Puzzle
+    public var difficulty: Difficulty
     public var guesses: [Guess]
 }
 

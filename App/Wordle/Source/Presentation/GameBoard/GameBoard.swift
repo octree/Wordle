@@ -72,6 +72,8 @@ struct GameBoard: View {
                 .padding()
             }
         }
+        .environment(\.puzzle, vm.puzzle)
+        .environment(\.difficulty, vm.difficulty)
     }
 
     private var playAgainView: some View {
@@ -81,5 +83,25 @@ struct GameBoard: View {
             Text("Play Again")
         }
         .buttonStyle(.bordered)
+    }
+}
+
+private enum DifficultyKey: EnvironmentKey {
+    static var defaultValue: Difficulty { .easy }
+}
+
+private enum PuzzleKey: EnvironmentKey {
+    static var defaultValue: Puzzle { .init(word: "") }
+}
+
+extension EnvironmentValues {
+    var difficulty: Difficulty {
+        get { self[DifficultyKey.self] }
+        set { self[DifficultyKey.self] = newValue }
+    }
+
+    var puzzle: Puzzle {
+        get { self[PuzzleKey.self] }
+        set { self[PuzzleKey.self] = newValue }
     }
 }
