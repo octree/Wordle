@@ -30,7 +30,7 @@ class GameBoardViewModel: ObservableObject {
         self.allWorld = allWorld
         appliedGuesses = guesses
         let guessedLetters: Set<Character> = guesses.reduce(Set()) {
-            $0.intersection(Set($1.guessLetters))
+            $0.union(Set($1.guessLetters))
         }
 
         guessStatus = .init(puzzle: puzzle, guessed: guessedLetters)

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:README.md">
+   </FileRef>
+   <Group
+      location = "container:App"
+      name = "App">
+      <FileRef
+         location = "group:Wordle.xcodeproj">
+      </FileRef>
+   </Group>
+   <Group
+      location = "container:Packages"
+      name = "Packages">
+   </Group>
+</Workspace>
