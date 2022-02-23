@@ -1,8 +1,8 @@
 //
-//  PuzzleLoader.swift
+//  GuessState.swift
 //  Wordle
 //
-//  Created by octree on 2022/2/22.
+//  Created by octree on 2022/2/23.
 //
 //  Copyright (c) 2022 Octree <octree@octree.me>
 //
@@ -26,13 +26,13 @@
 
 import Foundation
 
-public enum PuzzleLoader {
-    public static func loadWords() async throws -> [String] {
-        var words = [String]()
-        let url = Bundle.main.url(forResource: "wordle", withExtension: "txt")!
-        for try await line in url.lines {
-            words.append(line)
-        }
-        return words
+public struct GuessStatus {
+    public var puzzle: Puzzle
+    public var guessed: Set<Character>
+
+    public func status(forKey key: Key) -> KeyStatus {
+        guard case let .character(c) = key,
+              guessed.contains(c) else { return .unused }
+        return puzzle.contains(letter: c) ? .used : .wrong
     }
 }

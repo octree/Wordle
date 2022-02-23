@@ -1,8 +1,8 @@
 //
-//  PuzzleLoader.swift
+//  PersistedPuzzle.swift
 //  Wordle
 //
-//  Created by octree on 2022/2/22.
+//  Created by octree on 2022/2/23.
 //
 //  Copyright (c) 2022 Octree <octree@octree.me>
 //
@@ -26,13 +26,29 @@
 
 import Foundation
 
-public enum PuzzleLoader {
-    public static func loadWords() async throws -> [String] {
-        var words = [String]()
-        let url = Bundle.main.url(forResource: "wordle", withExtension: "txt")!
-        for try await line in url.lines {
-            words.append(line)
-        }
-        return words
+public struct PersistedPuzzle: Codable {
+    public var puzzle: Puzzle
+    public var guesses: [Guess]
+}
+
+extension PersistedPuzzle {
+    private static var url: URL {
+        FileManager.default
+            .urls(for: .documentDirectory, in: .userDomainMask).first!
+            .appendingPathComponent("puzzle.json")
+    }
+
+    static func read() -> PersistedPuzzle? {
+        guard let data = try? Data(contentsOf: url) else { return nil }
+        return try? JSONDecoder().decode(PersistedPuzzle.self, from: data)
+    }
+
+    func save() {
+        guard let data = try? JSONEncoder().encode(self) else { return }
+        try? data.write(to: Self.url)
+    }
+
+    static func clear() {
+        try? FileManager.default.removeItem(at: url)
     }
 }

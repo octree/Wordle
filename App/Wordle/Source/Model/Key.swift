@@ -1,8 +1,8 @@
 //
-//  PuzzleLoader.swift
+//  Key.swift
 //  Wordle
 //
-//  Created by octree on 2022/2/22.
+//  Created by octree on 2022/2/23.
 //
 //  Copyright (c) 2022 Octree <octree@octree.me>
 //
@@ -26,13 +26,28 @@
 
 import Foundation
 
-public enum PuzzleLoader {
-    public static func loadWords() async throws -> [String] {
-        var words = [String]()
-        let url = Bundle.main.url(forResource: "wordle", withExtension: "txt")!
-        for try await line in url.lines {
-            words.append(line)
-        }
-        return words
+public enum KeyStatus {
+    case used
+    case wrong
+    case unused
+}
+
+public enum Key: Hashable {
+    case character(Character)
+    case enter
+    case delete
+}
+
+extension Key: ExpressibleByStringLiteral {
+    public init(stringLiteral value: StringLiteralType) {
+        self = .character(value.first!)
+    }
+
+    static var groupedCharacterKeys: [[Key]] {
+        [
+            ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
+            ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
+            ["Z", "X", "C", "V", "B", "N", "M"]
+        ]
     }
 }
