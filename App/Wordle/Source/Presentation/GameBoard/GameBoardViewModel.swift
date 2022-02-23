@@ -27,7 +27,7 @@
 import Foundation
 import SwiftUI
 
-public enum GameStatus: Hashable, Equatable {
+public enum GameState: Hashable, Equatable {
     case won
     case lose
     case playing
@@ -40,7 +40,7 @@ public enum GameConstants {
 class GameBoardViewModel: ObservableObject {
     let puzzle: Puzzle
     let allWorld: Set<String>
-    @Published var status: GameStatus = .playing
+    @Published var state: GameState = .playing
     @Published private(set) var appliedGuesses: [Guess] = []
     @Published private(set) var currentGuess: Guess
     @Published private(set) var wrongAttemp: Bool = false
@@ -48,7 +48,7 @@ class GameBoardViewModel: ObservableObject {
     var proxy: ScrollViewProxy?
 
     var allGuesses: [Guess] {
-        status == .playing ? appliedGuesses + [currentGuess] : appliedGuesses
+        state == .playing ? appliedGuesses + [currentGuess] : appliedGuesses
     }
 
     init(puzzle: Puzzle, guesses: [Guess], allWorld: Set<String>) {
@@ -68,23 +68,21 @@ class GameBoardViewModel: ObservableObject {
             return
         }
         defer {
-            switch status {
+            switch state {
             case .won:
                 fallthrough
             case .lose:
-                print("💧 Clear Puzzle Cache")
                 PersistedPuzzle.clear()
             case .playing:
                 saveToDisk()
-                print("💧 Save Puzzle To Disk")
             }
         }
         appliedGuesses.append(currentGuess)
         puzzle.mergeKeyStatus(from: currentGuess, to: &keyStatus)
         if currentGuess.word == puzzle.word {
-            status = .won
+            state = .won
         } else if appliedGuesses.count == GameConstants.maxAttempCount {
-            status = .lose
+            state = .lose
         }
         currentGuess = puzzle.createEmptyGuess(index: appliedGuesses.count)
         performFlipAnimation()
@@ -109,7 +107,7 @@ class GameBoardViewModel: ObservableObject {
     // MARK: - Private Methods
 
     private func scrollToBottom() {
-        let id = status == .playing ? currentGuess.id : appliedGuesses.last!.id
+        let id = state == .playing ? currentGuess.id : appliedGuesses.last!.id
         proxy?.scrollTo(id, anchor: .bottom)
     }
 

@@ -51,7 +51,7 @@ struct GameBoard: View {
             }
 
             Spacer()
-            switch vm.status {
+            switch vm.state {
             case .playing:
                 Keyboard(keyStatus: vm.keyStatus) { vm.onTap(key: $0) }.padding()
             case .lose:
