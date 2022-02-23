@@ -10,6 +10,6 @@ This is a clone project of the popular word guessing game. Made using `SwiftUI`
 
 ![Demo](./Images/demo.png)
 
-\## License
+## License
 
 **Wordle** is available under the MIT license. See the LICENSE file for more info.
