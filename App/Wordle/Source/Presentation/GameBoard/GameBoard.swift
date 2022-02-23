@@ -28,11 +28,9 @@ import SwiftUI
 
 struct GameBoard: View {
     @ObservedObject private var vm: GameBoardViewModel
-    var playAgain: () -> ()
 
-    init(puzzle: Puzzle, guesses: [Guess], allWorld: Set<String>, playAgain: @escaping () -> ()) {
-        _vm = .init(initialValue: .init(puzzle: puzzle, guesses: guesses, allWorld: allWorld))
-        self.playAgain = playAgain
+    init(allPuzzleWords: Set<String>) {
+        _vm = .init(initialValue: .init(allPuzzleWords: allPuzzleWords))
     }
 
     var body: some View {
@@ -78,7 +76,7 @@ struct GameBoard: View {
 
     private var playAgainView: some View {
         Button {
-            playAgain()
+            vm.playAgain()
         } label: {
             Text("Play Again")
         }

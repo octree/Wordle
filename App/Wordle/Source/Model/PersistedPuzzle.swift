@@ -26,21 +26,28 @@
 
 import Foundation
 
-public struct PersistedPuzzle: Codable {
+public enum GameState: String, Hashable, Equatable, Codable {
+    case won
+    case lose
+    case playing
+}
+
+public struct PersistedGame: Codable {
+    public var state: GameState
     public var puzzle: Puzzle
     public var guesses: [Guess]
 }
 
-extension PersistedPuzzle {
+extension PersistedGame {
     private static var url: URL {
         FileManager.default
             .urls(for: .documentDirectory, in: .userDomainMask).first!
-            .appendingPathComponent("puzzle.json")
+            .appendingPathComponent("game.json")
     }
 
-    static func read() -> PersistedPuzzle? {
+    static func read() -> PersistedGame? {
         guard let data = try? Data(contentsOf: url) else { return nil }
-        return try? JSONDecoder().decode(PersistedPuzzle.self, from: data)
+        return try? JSONDecoder().decode(PersistedGame.self, from: data)
     }
 
     func save() {

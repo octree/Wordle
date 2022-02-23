@@ -27,19 +27,13 @@
 import Foundation
 import SwiftUI
 
-public enum GameState: Hashable, Equatable {
-    case won
-    case lose
-    case playing
-}
-
 public enum GameConstants {
     public static let maxAttempCount = 10
 }
 
 class GameBoardViewModel: ObservableObject {
-    let puzzle: Puzzle
-    let allWorld: Set<String>
+    private(set) var puzzle: Puzzle
+    let allPuzzleWords: Set<String>
     @Published var state: GameState = .playing
     @Published private(set) var appliedGuesses: [Guess] = []
     @Published private(set) var currentGuess: Guess
@@ -51,9 +45,19 @@ class GameBoardViewModel: ObservableObject {
         state == .playing ? appliedGuesses + [currentGuess] : appliedGuesses
     }
 
-    init(puzzle: Puzzle, guesses: [Guess], allWorld: Set<String>) {
+    init(allPuzzleWords: Set<String>) {
+        let puzzle: Puzzle
+        let guesses: [Guess]
+        if let game = PersistedGame.read() {
+            state = game.state
+            puzzle = game.puzzle
+            guesses = game.guesses
+        } else {
+            puzzle = .init(word: allPuzzleWords.randomElement()!)
+            guesses = []
+        }
         self.puzzle = puzzle
-        self.allWorld = allWorld
+        self.allPuzzleWords = allPuzzleWords
         appliedGuesses = guesses
         keyStatus = puzzle.keyStatus(from: guesses)
         currentGuess = puzzle.createEmptyGuess(index: guesses.count)
@@ -63,19 +67,14 @@ class GameBoardViewModel: ObservableObject {
     // MARK: - Public Method
 
     func apply() {
-        guard currentGuess.guessLetters.count == puzzle.word.count, allWorld.contains(currentGuess.word) else {
+        guard currentGuess.guessLetters.count == puzzle.word.count,
+              allPuzzleWords.contains(currentGuess.word)
+        else {
             performWrongAttempAnimation()
             return
         }
         defer {
-            switch state {
-            case .won:
-                fallthrough
-            case .lose:
-                PersistedPuzzle.clear()
-            case .playing:
-                saveToDisk()
-            }
+            saveToDisk()
         }
         appliedGuesses.append(currentGuess)
         puzzle.mergeKeyStatus(from: currentGuess, to: &keyStatus)
@@ -102,6 +101,14 @@ class GameBoardViewModel: ObservableObject {
 
     func setProxy(_ proxy: ScrollViewProxy) {
         self.proxy = proxy
+    }
+
+    func playAgain() {
+        puzzle = .init(word: allPuzzleWords.randomElement()!)
+        state = .playing
+        appliedGuesses = []
+        currentGuess = puzzle.createEmptyGuess(index: 0)
+        keyStatus = [:]
     }
 
     // MARK: - Private Methods
@@ -151,7 +158,7 @@ class GameBoardViewModel: ObservableObject {
 
     private func saveToDisk() {
         Task {
-            PersistedPuzzle(puzzle: self.puzzle, guesses: self.appliedGuesses)
+            PersistedGame(state: state, puzzle: self.puzzle, guesses: self.appliedGuesses)
                 .save()
         }
     }

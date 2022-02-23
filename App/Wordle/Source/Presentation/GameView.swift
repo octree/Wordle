@@ -35,8 +35,8 @@ struct GameView: View {
             ZStack {
                 Rectangle().fill(Color.Assets.Background.primary)
                     .ignoresSafeArea()
-                if let puzzle = vm.currentPuzzle {
-                    GameBoard(puzzle: puzzle, guesses: vm.guesses, allWorld: vm.wordSet) { vm.loadRandomPuzzle() }
+                if !vm.allPuzzleWords.isEmpty {
+                    GameBoard(allPuzzleWords: vm.allPuzzleWords)
                 }
             }
             .navigationViewStyle(.stack)
