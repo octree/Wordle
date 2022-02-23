@@ -1,7 +1,7 @@
 {
-    "assetPath": "./Wordle/Resource/Assets.xcassets",
-    "swiftUIColorDestination": "./Wordle/Resource/Generated/Color.Generated.swift",
-    "swiftUIImageDestination": "./Wordle/Resource/Generated/Image.Generated.swift",
+    "assetPath": "./App/Wordle/Resource/Assets.xcassets",
+    "swiftUIColorDestination": "./App/Wordle/Resource/Generated/Color.Generated.swift",
+    "swiftUIImageDestination": "./App/Wordle/Resource/Generated/Image.Generated.swift",
     "assetNamespace": "Assets",
     "isSPM": false
 }
