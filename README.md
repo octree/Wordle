@@ -2,7 +2,7 @@
 
 
 
-This is a clone project of the popular word guessing game. Made using `SwiftUI`
+This is a clone project of **Wordle**. The app is made using `SwiftUI`. You can play more than once a day. 
 
 
 
